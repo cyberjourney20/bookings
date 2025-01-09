@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/cyberjourney20/bookings/pkg/config"
-	"github.com/cyberjourney20/bookings/pkg/handlers"
-	"github.com/cyberjourney20/bookings/pkg/render"
+	"github.com/cyberjourney20/bookings/internal/config"
+	"github.com/cyberjourney20/bookings/internal/handlers"
+	"github.com/cyberjourney20/bookings/internal/render"
 
 	"github.com/alexedwards/scs/v2"
 )
