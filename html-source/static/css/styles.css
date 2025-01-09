@@ -1,0 +1,25 @@
+.my-footer {
+    height: 4em;
+    background-color: #3389CC;
+    margin-top: 1em;
+    padding: 1em;
+    color: #FFFFFF;
+    font-size: 80%;
+
+}
+
+.room-image {
+    max-width: 70%;
+    padding: 2em;
+}
+
+.redText {
+    color: red
+}
+
+.datepicker {
+    z-index: 10000;
+}
+.swal2-html-container {
+    z-index: 2;
+}
