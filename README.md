@@ -12,3 +12,4 @@ Web App from Udemy course from https://github.com/tsawler
 - Uses [Vanilla JS Datepicker](https://mymth.github.io/vanillajs-datepicker/#/)
 - Uses [Notie](https://github.com/jaredreich/notie)
 - Uses [SweettAlert2](https://sweetalert2.github.io/#download)
+- Uses [GoValidator](https://github.com/asaskevich/govalidator)

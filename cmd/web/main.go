@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,6 +9,7 @@ import (
 
 	"github.com/cyberjourney20/bookings/internal/config"
 	"github.com/cyberjourney20/bookings/internal/handlers"
+	"github.com/cyberjourney20/bookings/internal/models"
 	"github.com/cyberjourney20/bookings/internal/render"
 
 	"github.com/alexedwards/scs/v2"
@@ -19,6 +21,8 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+	// What goes in the session
+	gob.Register(models.Reservation{})
 	//change to true when in production
 	app.InProduction = false
 
