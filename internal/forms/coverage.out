@@ -1,0 +1,18 @@
+mode: set
+github.com/cyberjourney20/bookings/internal/forms/errors.go:6.44,8.2 1 1
+github.com/cyberjourney20/bookings/internal/forms/errors.go:11.42,13.18 2 1
+github.com/cyberjourney20/bookings/internal/forms/errors.go:13.18,15.3 1 1
+github.com/cyberjourney20/bookings/internal/forms/errors.go:16.2,16.14 1 0
+github.com/cyberjourney20/bookings/internal/forms/forms.go:18.33,23.2 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:26.43,27.31 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:27.31,29.37 2 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:29.37,31.4 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:36.39,38.13 2 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:38.13,40.3 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:41.2,41.13 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:45.29,47.2 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:50.57,52.21 2 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:52.21,55.3 2 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:56.2,56.13 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:60.38,61.40 1 1
+github.com/cyberjourney20/bookings/internal/forms/forms.go:61.40,63.3 1 1
