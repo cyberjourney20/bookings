@@ -14,6 +14,11 @@ type Form struct {
 	Errors errors
 }
 
+// Valid returns true if there are no errors otherwise false
+func (f *Form) Valid() bool {
+	return len(f.Errors) == 0
+}
+
 // New initializes a form struct
 func New(data url.Values) *Form {
 	return &Form{
@@ -39,11 +44,6 @@ func (f *Form) Has(field string) bool {
 		return false
 	}
 	return true
-}
-
-// Valid returns true if there are no errors otherwise false
-func (f *Form) Valid() bool {
-	return len(f.Errors) == 0
 }
 
 // MinLength checks for string minimum length
