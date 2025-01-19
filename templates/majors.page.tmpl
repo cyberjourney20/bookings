@@ -19,7 +19,7 @@
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<a id="availabilityButton" class="btn btn-primary">Check Avalibility</a>
+				<a id="availabilityButton" class="btn btn-primary">Check Availability</a>
 			</div>
 		</div>
 	</div>
@@ -30,7 +30,7 @@
 <script>
 	document.getElementById("availabilityButton").addEventListener("click", function() {
 	let html =`
-	<form id="check-avalibility-form" action="" method="post" novalidate class="needs-validation"> 
+	<form id="check-availability-form" action="" method="post" novalidate class="needs-validation"> 
 		<div class="row" id="reservation-dates-modal">
 			<div class="col-md-6">
 				<input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
@@ -41,7 +41,45 @@
 		</div>
 	</form>
 	`
-	attention.custom({msg: html, title: "Search Avalibility"});
+	attention.custom({
+		msg: html, 
+		title: "Search Availability",
+		
+		willOpen: () => {
+			const elem = document.getElementById('reservation-dates-modal');
+			const rp = new DateRangePicker(elem, {
+				format: 'yyyy-mm-dd',
+				minDate: new Date(),
+				showOnFocus: true,
+				
+			})
+		},
+
+		didOpen: () => {
+			document.getElementById("start").removeAttribute('disabled');
+			document.getElementById('end').removeAttribute('disabled');
+		},
+
+		callback: function(result){
+			console.log("called");
+
+			let form = document.getElementById("check-availability-form");
+			let formData = new FormData(form);
+			formData.append("csrf_token", "{{.CSRFToken}}");
+
+
+			fetch('/search-availability-json', {
+				method: "post",
+				body: formData,
+			})
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+					console.log(data.ok);
+					console.log(data.message);
+				})
+		}
+	});
 	})	
 </script>
 {{end}}

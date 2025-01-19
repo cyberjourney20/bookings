@@ -24,6 +24,8 @@ var app config.AppConfig
 var session *scs.SessionManager
 var functions = template.FuncMap{}
 
+//var db
+
 func getRoutes() http.Handler {
 	gob.Register(models.Reservation{})
 	//change to true when in production
@@ -53,7 +55,7 @@ func getRoutes() http.Handler {
 
 	repo := NewRepo(&app)
 	NewHandlers(repo)
-	render.NewTemplates(&app)
+	render.NewRenderer(&app)
 
 	mux := chi.NewRouter()
 
