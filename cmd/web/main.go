@@ -72,7 +72,7 @@ func run() (*driver.DB, error) {
 	app.Session = session
 
 	//godotenv to load secrets from .env file
-	err := godotenv.Load()
+	err := godotenv.Load(os.ExpandEnv("./.env"))
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}

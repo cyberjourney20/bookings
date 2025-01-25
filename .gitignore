@@ -2,3 +2,5 @@ run.bat
 database.yml
 schema.sql
 .env
+/.test
+coverage.bat

@@ -1,13 +1,18 @@
 package handlers
 
 import (
+	"context"
 	"encoding/gob"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"net/http/httptest"
+	"net/url"
 	"os"
 	"path/filepath"
+	"strings"
+	"testing"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
@@ -24,9 +29,7 @@ var app config.AppConfig
 var session *scs.SessionManager
 var functions = template.FuncMap{}
 
-//var db
-
-func getRoutes() http.Handler {
+func TestMain(m *testing.M) {
 	gob.Register(models.Reservation{})
 	//change to true when in production
 	app.InProduction = false
@@ -53,10 +56,14 @@ func getRoutes() http.Handler {
 	app.TemplateCache = tc
 	app.UseCache = true
 
-	repo := NewRepo(&app)
+	repo := NewTestRepo(&app)
 	NewHandlers(repo)
 	render.NewRenderer(&app)
 
+	os.Exit(m.Run())
+}
+
+func getRoutes() http.Handler {
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.Recoverer)
@@ -68,7 +75,7 @@ func getRoutes() http.Handler {
 	mux.Get("/generals-quarters", Repo.Generals)
 	mux.Get("/majors-suite", Repo.Majors)
 
-	mux.Get("/search-availability", Repo.Availability)
+	mux.Get("/search-availability", Repo.SearchAvailability)
 	mux.Post("/search-availability", Repo.PostAvailability)
 	mux.Post("/search-availability-json", Repo.AvailabilityJSON)
 
@@ -137,3 +144,32 @@ func CreateTestTemplateCache() (map[string]*template.Template, error) {
 
 	return myCache, nil
 }
+
+func GetCtx(req *http.Request) context.Context {
+	ctx, err := session.Load(req.Context(), req.Header.Get("X-Session"))
+	if err != nil {
+		log.Println(err)
+	}
+	return ctx
+}
+
+// TestServer launches the test server for below functions (move to setup_test.Go)
+func GETHandlersTestServer(gp, url string) (rr *httptest.ResponseRecorder, req *http.Request, ctx context.Context) {
+	req, _ = http.NewRequest(gp, url, nil)
+	ctx = GetCtx(req)
+	req = req.WithContext(ctx)
+	rr = httptest.NewRecorder()
+	return rr, req, ctx
+}
+
+// TestServer launches the test server for below functions (move to setup_test.Go)
+func POSTHandlersTestServer(gp, url string, postedData url.Values) (rr *httptest.ResponseRecorder, req *http.Request, ctx context.Context) {
+	req, _ = http.NewRequest(gp, url, strings.NewReader(postedData.Encode()))
+	ctx = GetCtx(req)
+	req = req.WithContext(ctx)
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	rr = httptest.NewRecorder()
+	return rr, req, ctx
+}
+
+//reqBody, *strings.Reader
