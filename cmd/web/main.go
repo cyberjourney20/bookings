@@ -33,6 +33,10 @@ func main() {
 	}
 	//Close db connectiion when program closes
 	defer db.SQL.Close()
+	defer close(app.MailChan)
+
+	fmt.Println("Staring mail listener...")
+	listenForMail()
 
 	fmt.Printf("Starting application on port: %s\n", portNumber)
 
@@ -53,6 +57,9 @@ func run() (*driver.DB, error) {
 	gob.Register(models.User{})
 	gob.Register(models.Restriction{})
 	gob.Register(models.RoomRestriction{})
+
+	mailChan := make(chan models.MailData)
+	app.MailChan = mailChan
 
 	//change to true when in production
 	app.InProduction = false

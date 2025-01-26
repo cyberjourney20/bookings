@@ -8,6 +8,7 @@ Built in Go version 1.22.3
 - Uses	[nosurf](github.com/justinas/nosurf) v1.1.1
 - Uses [GoValidator](https://github.com/asaskevich/govalidator) v0.0.0-20230301143203-a9d515a09cc2
 - Uses [GoDotEnv](https://github.com/joho/godotenv) v1.5.1
+- Uses [Go Simple Mail](https://github.com/xhit/go-simple-mail) 
 
 JavaScript Sources
 - Uses [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
